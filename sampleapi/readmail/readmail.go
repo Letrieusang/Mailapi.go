@@ -105,7 +105,7 @@ func main() {
 		}
 		ch := make(chan *imap.Message, 100)
 		myseqset := new(imap.SeqSet)
-		if count != mbox.Messages {
+		if count < mbox.Messages {
 			count += 1
 			myseqset.AddRange(count, mbox.Messages)
 			c.Fetch(myseqset, []imap.FetchItem{imap.FetchItem("BODY.PEEK[]")}, ch)
@@ -147,9 +147,8 @@ func main() {
 				}
 			}
 		} else {
-			count = mbox.Messages
 			continue
-		} //
+		} 
 
 	}
 }
